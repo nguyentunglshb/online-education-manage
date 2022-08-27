@@ -1,5 +1,5 @@
 import React from "react";
-import { Input } from "antd";
+import { Input, InputNumber } from "antd";
 
 import { ICustomInput } from "@interfaces/components";
 import { enumInputType } from "@enums/components";
@@ -12,6 +12,7 @@ export const CustomInput = (props: ICustomInput) => {
     placeholder,
     className,
     hintText,
+    pRef,
     prefixIcon,
     suffixIcon,
     destructive = false,
@@ -19,6 +20,8 @@ export const CustomInput = (props: ICustomInput) => {
     addOnAfter,
     addOnBefore,
     allowClear = false,
+    min,
+    max,
     value,
     onChange,
   } = props;
@@ -27,20 +30,38 @@ export const CustomInput = (props: ICustomInput) => {
       <label htmlFor="" className="input-label">
         {label}
       </label>
-      <Input
-        type={type}
-        addonAfter={addOnAfter}
-        addonBefore={addOnBefore}
-        name={name}
-        placeholder={placeholder}
-        prefix={prefixIcon}
-        suffix={suffixIcon}
-        status={destructive === true ? "error" : ""}
-        disabled={disable}
-        allowClear={allowClear}
-        value={value}
-        onChange={onChange}
-      />
+      {type === enumInputType.NUMBER && (
+        <InputNumber
+          min={min}
+          max={max}
+          onChange={onChange}
+          addonAfter={addOnAfter}
+          addonBefore={addOnBefore}
+          name={name}
+          ref={pRef}
+          placeholder={placeholder}
+          prefix={prefixIcon ? prefixIcon : <span />}
+          status={destructive === true ? "error" : ""}
+          disabled={disable}
+        />
+      )}
+      {type !== enumInputType.NUMBER && (
+        <Input
+          type={type}
+          addonAfter={addOnAfter}
+          addonBefore={addOnBefore}
+          name={name}
+          ref={pRef}
+          placeholder={placeholder}
+          prefix={prefixIcon ? prefixIcon : <span />}
+          suffix={suffixIcon ? suffixIcon : <span />}
+          status={destructive === true ? "error" : ""}
+          disabled={disable}
+          allowClear={allowClear}
+          value={value}
+          onChange={onChange}
+        />
+      )}
       <p className="hint-text">{hintText}</p>
     </div>
   );

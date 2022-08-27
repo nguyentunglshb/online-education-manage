@@ -1,6 +1,14 @@
 export enum enumInputType {
   TEXT = "text",
   PASSWORD = "password",
+  NUMBER = "number",
+}
+
+export enum enumLevel {
+  PRIMARY_SCHOOL = "primarySchool",
+  JUNIOR_HIGH_SCHOOL = "juniorHighSchool",
+  HIGH_SCHOOL = "highSchool",
+  UNIVERSITY = "university",
 }
 
 export enum enumIconColor {
