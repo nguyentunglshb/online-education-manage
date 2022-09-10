@@ -3,11 +3,11 @@ import axiosClient from "./axiosClient";
 
 export const questionAPI = {
   createQuestion: (body: ICreateQuestion) => {
-    const url = `/question/createQuestion`;
+    const url = `/api/question/createQuestion`;
     return axiosClient.post(url, body);
   },
   getAllQuestionsCreatedByTeacher: () => {
-    const url = `/question/getAllQuestionsByTeacher`;
+    const url = `/api/question/getAllQuestionsByTeacher`;
     return axiosClient.get(url);
   },
 };

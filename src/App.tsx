@@ -6,6 +6,7 @@ import "./App.css";
 
 import { RequiredAuth } from "@routes";
 import { privateRoutes, publicRoutes } from "@routes/routers";
+import { DefaultLayout } from "@layout";
 
 function App() {
   return (
@@ -13,17 +14,48 @@ function App() {
       <BrowserRouter>
         <Routes>
           {publicRoutes.map((route) => {
-            let Page = route.component;
+            const Page = route.component;
+            let Layout: any = DefaultLayout;
+
+            if (route.layout) {
+              Layout = route.layout;
+            } else if (route.layout === null) {
+              Layout = <></>;
+            }
             return (
-              <Route key={route.name} element={<Page />} path={route.path} />
+              <Route
+                key={route.name}
+                element={
+                  <Layout>
+                    <Page />
+                  </Layout>
+                }
+                path={route.path}
+              />
             );
           })}
-          // private route
+
+          {/* private route */}
           <Route element={<RequiredAuth />}>
             {privateRoutes.map((route) => {
-              let Page = route.component;
+              const Page = route.component;
+              let Layout: any = DefaultLayout;
+
+              if (route.layout) {
+                Layout = route.layout;
+              } else if (route.layout === null) {
+                Layout = <></>;
+              }
               return (
-                <Route key={route.name} element={<Page />} path={route.path} />
+                <Route
+                  key={route.name}
+                  element={
+                    <Layout>
+                      <Page />
+                    </Layout>
+                  }
+                  path={route.path}
+                />
               );
             })}
           </Route>

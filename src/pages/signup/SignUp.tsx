@@ -1,6 +1,6 @@
 import React from "react";
 import { useFormik } from "formik";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation } from "react-router-dom";
 
 import { authAPI } from "@api/authAPI";
 import { UserIcon } from "@assets/icons/baseIcon/BaseIcons";
@@ -9,9 +9,13 @@ import { CustomButton, CustomInput, popupToast, ToastBox } from "@components";
 import { enumInputType } from "@enums/components";
 import { ISignUpTeacher } from "@interfaces";
 import { StyledSignUp } from "./style";
-import { LOGIN } from "@routes";
+import { HOME, LOGIN } from "@routes";
+import { isUserLoggedIn } from "@utils";
 
 export const SignUp = () => {
+  const isAuth = isUserLoggedIn();
+  const location = useLocation();
+
   const signupFormik = useFormik({
     initialValues: {
       teacherName: "",
@@ -39,7 +43,9 @@ export const SignUp = () => {
     }
   };
 
-  return (
+  return isAuth ? (
+    <Navigate to={HOME} state={{ from: location }} replace />
+  ) : (
     <StyledSignUp>
       <ToastBox />
       <form onSubmit={signupFormik.handleSubmit}>

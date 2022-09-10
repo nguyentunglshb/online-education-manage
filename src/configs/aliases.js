@@ -9,6 +9,7 @@ const aliases = () => ({
   "@hooks": "./src/hooks",
   "@interfaces": "./src/interfaces",
   "@assets": "./src/assets",
+  "@layout": "./src/layout",
 });
 
 module.exports = aliases;

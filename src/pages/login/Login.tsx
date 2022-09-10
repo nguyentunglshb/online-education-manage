@@ -8,12 +8,14 @@ import { enumInputType } from "@enums/components";
 import { authAPI } from "@api/authAPI";
 import { ITeacherLogin } from "@interfaces";
 import { popupToast, ToastBox } from "@components";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { HOME, SIGNUP } from "@routes";
-import { setTokenToLocalStorage } from "@utils";
+import { isUserLoggedIn, setTokenToLocalStorage } from "@utils";
 
 export const Login = () => {
   const navigate = useNavigate();
+  const isAuth = isUserLoggedIn();
+  const location = useLocation();
 
   const loginFormik = useFormik({
     initialValues: {
@@ -44,7 +46,9 @@ export const Login = () => {
     }
   };
 
-  return (
+  return isAuth ? (
+    <Navigate to={HOME} state={{ from: location }} replace />
+  ) : (
     <StyledLogin>
       <ToastBox />
       <form onSubmit={loginFormik.handleSubmit}>

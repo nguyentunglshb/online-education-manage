@@ -29,6 +29,7 @@ export interface ICustomButton {
   icon?: ReactNode;
   disabled?: boolean;
   onClick?: () => void;
+  type?: "primary" | "ghost" | "dashed" | "link" | "text" | "default";
 }
 
 export interface ICustomOption {

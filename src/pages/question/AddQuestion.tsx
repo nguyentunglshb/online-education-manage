@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 
 import { CustomButton, CustomInput, CustomSelect, ToastBox } from "@components";
 import { CustomRadio } from "@components/customRadio/CustomRadio";
-import { level, mutilSelect } from "@utils";
+import { level } from "@utils";
 import { StyledAdd } from "./style";
 
 export const AddQuestion = () => {
